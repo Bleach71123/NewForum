@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Forum
 {
@@ -10,6 +12,7 @@ namespace Forum
         SpriteBatch spriteBatch;
         SpriteFont font;
         PostButton postButton;
+        ArrayList posts;
 
         public Game1()
         {
@@ -22,6 +25,7 @@ namespace Forum
         {
             font = Content.Load<SpriteFont>("Font");
             postButton = new PostButton(GraphicsDevice, font);
+            posts = new ArrayList();
             base.Initialize();
         }
 
@@ -40,6 +44,11 @@ namespace Forum
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            postButton.Update(gameTime);
+            if (postButton.NewPost())
+            {
+                //posts.Add(new Post());
+            }
 
             base.Update(gameTime);
         }
