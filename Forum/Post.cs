@@ -34,11 +34,13 @@ namespace Forum
             this.color = color;
 
             respond = new RespondButton(g, font, textPosition);
+            delete = new DeleteButton(g, font, textPosition);
         }
 
         public void Update(GameTime gt)
         {
             respond.Update(gt);
+            delete.Update(gt);
         }
 
         public void Draw(SpriteBatch b)
@@ -50,6 +52,7 @@ namespace Forum
             b.DrawString(font, WrapText(post), textPosition + new Vector2(5, 25), Color.Black);
 
             respond.Draw(b);
+            delete.Draw(b);
         }
 
         private String WrapText(string text)

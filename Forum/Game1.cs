@@ -13,7 +13,7 @@ namespace Forum
         SpriteFont font;
         PostButton postButton;
         ArrayList posts;
-        DeleteButton deleteButton;
+        //DeleteButton deleteButton;
         int numberPost;
 
         public Game1()
@@ -27,7 +27,7 @@ namespace Forum
         {
             font = Content.Load<SpriteFont>("Font");
             postButton = new PostButton(GraphicsDevice, font);
-            deleteButton = new DeleteButton(GraphicsDevice, font);
+            //deleteButton = new DeleteButton(GraphicsDevice, font);
             posts = new ArrayList();
 
             base.Initialize();
@@ -71,7 +71,7 @@ namespace Forum
             spriteBatch.Begin();
             postButton.Draw(spriteBatch);
 
-            deleteButton.Draw(spriteBatch);
+            //deleteButton.Draw(spriteBatch);
 
             foreach (Post post in posts)
             {
