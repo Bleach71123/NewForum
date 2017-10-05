@@ -32,6 +32,13 @@ namespace Forum
 
             this.font = font;
             this.color = color;
+
+            respond = new RespondButton(g, font, textPosition);
+        }
+
+        public void Update(GameTime gt)
+        {
+            respond.Update(gt);
         }
 
         public void Draw(SpriteBatch b)
@@ -41,6 +48,8 @@ namespace Forum
             b.DrawString(font, "Author: " + author, textPosition, Color.Black);
             //post = WrapText(post);
             b.DrawString(font, WrapText(post), textPosition + new Vector2(5, 25), Color.Black);
+
+            respond.Draw(b);
         }
 
         private String WrapText(string text)

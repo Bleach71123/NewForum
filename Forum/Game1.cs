@@ -56,6 +56,10 @@ namespace Forum
                 posts.Add(new Post(GraphicsDevice, "BLeach", "This is my first post. This is my first post. This is my first post. This is my first post. This is my first post.", font, postButton.getNewColor(), numberPost));
                 numberPost++;
             }
+            foreach (Post post in posts)
+            {
+                post.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
