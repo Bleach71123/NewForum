@@ -10,6 +10,7 @@ namespace Forum
         SpriteBatch spriteBatch;
         SpriteFont font;
         PostButton postButton;
+        DeleteButton deleteButton;
 
         public Game1()
         {
@@ -22,6 +23,8 @@ namespace Forum
         {
             font = Content.Load<SpriteFont>("Font");
             postButton = new PostButton(GraphicsDevice, font);
+            deleteButton = new DeleteButton(GraphicsDevice, font);
+
             base.Initialize();
         }
 
@@ -50,6 +53,8 @@ namespace Forum
 
             spriteBatch.Begin();
             postButton.Draw(spriteBatch);
+
+            deleteButton.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
