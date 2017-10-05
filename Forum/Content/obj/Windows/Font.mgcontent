@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/OneDrive - Bay Path Regional School District/Shop/MonoGame/Forum/Forum/Content/Font.spritefont</SourceFile>
-  <SourceTime>2017-10-05T11:28:22.1796962-04:00</SourceTime>
+  <SourceTime>2017-10-05T12:11:36.0189415-04:00</SourceTime>
   <DestFile>D:/OneDrive - Bay Path Regional School District/Shop/MonoGame/Forum/Forum/Content/bin/Windows/Font.xnb</DestFile>
-  <DestTime>2017-10-05T11:57:39.7790704-04:00</DestTime>
+  <DestTime>2017-10-05T12:12:24.3970412-04:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
