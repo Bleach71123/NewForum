@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Forum
 {
@@ -12,6 +14,8 @@ namespace Forum
         SpriteFont font;
         Color color = Color.LightGray;
         bool clickReleaseReady;
+        List<Color> listOcolor;
+        int count;
 
         public PostButton(GraphicsDevice g, SpriteFont font)
         {
@@ -20,6 +24,15 @@ namespace Forum
             r = new Rectangle(10, 10, 70, 25);
             this.font = font;
             clickReleaseReady = false;
+
+            count = 0;
+            listOcolor = new List<Color>();
+            listOcolor.Add(Color.RoyalBlue);
+            listOcolor.Add(Color.SeaGreen);
+            listOcolor.Add(Color.IndianRed);
+            listOcolor.Add(Color.Khaki);
+            listOcolor.Add(Color.LightSteelBlue);
+            listOcolor.Add(Color.Peru);
         }
 
         public void Update(GameTime gt)
@@ -35,7 +48,7 @@ namespace Forum
             else
             {
                 color = Color.LightGray;
-                clickReleaseReady = false;
+                //clickReleaseReady = false;
             }
             
         }
@@ -50,12 +63,23 @@ namespace Forum
         {
             if (clickReleaseReady && Mouse.GetState().LeftButton == ButtonState.Released)
             {
+                clickReleaseReady = false;
                 if (Mouse.GetState().X > 10 && Mouse.GetState().X < 80 && Mouse.GetState().Y > 10 && Mouse.GetState().Y < 35)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public Color getNewColor()
+        {
+            Color c = listOcolor[count];
+            if (count < listOcolor.Count - 1)
+                count++;
+            else
+                count = 0;
+            return c;
         }
     }
 }

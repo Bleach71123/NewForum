@@ -14,6 +14,7 @@ namespace Forum
         PostButton postButton;
         ArrayList posts;
         DeleteButton deleteButton;
+        int numberPost;
 
         public Game1()
         {
@@ -46,11 +47,14 @@ namespace Forum
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.F11))
+                graphics.ToggleFullScreen();
 
             postButton.Update(gameTime);
             if (postButton.NewPost())
             {
-                //posts.Add(new Post());
+                posts.Add(new Post(GraphicsDevice, "BLeach", "This is my first post. This is my first post. This is my first post. This is my first post. This is my first post.", font, postButton.getNewColor(), numberPost));
+                numberPost++;
             }
 
             base.Update(gameTime);
@@ -64,6 +68,11 @@ namespace Forum
             postButton.Draw(spriteBatch);
 
             deleteButton.Draw(spriteBatch);
+
+            foreach (Post post in posts)
+            {
+                post.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
