@@ -17,7 +17,7 @@ namespace Forum
         SpriteFont font;
         Rectangle backRect;
         Texture2D t;
-        int lines = 1;
+        int lines = 1, width = 150;
 
         bool textReady = true;
         Keys hold; 
@@ -26,14 +26,14 @@ namespace Forum
         {
             t = new Texture2D(g, 1, 1);
             t.SetData(new Color[] { Color.White });
-            backRect = new Rectangle(100, 100, 100, 30);
+            backRect = new Rectangle(100, 100, width, 30);
             this.font = font;
         }
 
         public void Draw(SpriteBatch b)
         {
             b.Draw(t, backRect, Color.LightGray);
-            b.DrawString(font, WrapText(text), new Vector2(100, 100), Color.Black);
+            b.DrawString(font, WrapText(text), new Vector2(110, 100), Color.Black);
         }
 
         public void Update(GameTime gt)
@@ -88,15 +88,15 @@ namespace Forum
 
         private String WrapText(string text)
         {
+            lines = 1;
             string[] words = text.Split(' ');
             StringBuilder sb = new StringBuilder();
             float linewidth = 0f;
-            float maxLine = 80f;
+            float maxLine = (float)width - 20f;
             float spaceWidth = font.MeasureString(" ").X;
 
             foreach (string word in words)
             {
-                lines = 1;
                 Vector2 size = font.MeasureString(word);
                 if (linewidth + size.X < maxLine)
                 {
