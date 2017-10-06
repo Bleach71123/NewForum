@@ -17,6 +17,7 @@ namespace Forum
         SpriteFont font;
         Rectangle backRect;
         Texture2D t;
+        int lines = 1;
 
         bool textReady = true;
         Keys hold; 
@@ -32,7 +33,7 @@ namespace Forum
         public void Draw(SpriteBatch b)
         {
             b.Draw(t, backRect, Color.LightGray);
-            b.DrawString(font, text, new Vector2(100, 100), Color.Black);
+            b.DrawString(font, WrapText(text), new Vector2(100, 100), Color.Black);
         }
 
         public void Update(GameTime gt)
@@ -61,7 +62,8 @@ namespace Forum
                     }
                 }
             }*/
-
+            if (Keyboard.GetState().IsKeyUp(hold))
+                textReady = true;
             Keys[] keys = Keyboard.GetState().GetPressedKeys();
             if (keys.Length > 0)
             {
@@ -69,20 +71,18 @@ namespace Forum
                 {
                     if (keys[0] == Keys.Back)
                         BackSpace();
-                    else
+                    else if (keys[0] != Keys.LeftShift && keys[0] != Keys.RightShift)
                     {
-                        Char[] keyInput = ConvertKeyToChar(keys[0], false).ToCharArray();
+                        Char[] keyInput = ConvertKeyToChar(keys[0], Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift)).ToCharArray();
                         CharEntered(keyInput[0]);
+                        //shift = false;
                     }
                     hold = keys[0];
                     textReady = false;
                 }
-                else
-                {
-                    if (Keyboard.GetState().IsKeyUp(hold))
-                        textReady = true;
-                }
             }
+
+            backRect.Height = (int)font.MeasureString("O").Y * lines;
 
         }
 
@@ -91,11 +91,12 @@ namespace Forum
             string[] words = text.Split(' ');
             StringBuilder sb = new StringBuilder();
             float linewidth = 0f;
-            float maxLine = 170f;
+            float maxLine = 80f;
             float spaceWidth = font.MeasureString(" ").X;
 
             foreach (string word in words)
             {
+                lines = 1;
                 Vector2 size = font.MeasureString(word);
                 if (linewidth + size.X < maxLine)
                 {
@@ -106,6 +107,7 @@ namespace Forum
                 {
                     sb.Append("\n" + word + " ");
                     linewidth = size.X + spaceWidth;
+                    lines++;
                 }
             }
             return sb.ToString();
@@ -115,17 +117,21 @@ namespace Forum
         {
             string newText = text.Insert(cursorPos, c.ToString()); //Insert the char
             //Check if the text width is shorter than the back rectangle
-            if (font.MeasureString(newText).X < backRect.Width)
-            {
+           // if (font.MeasureString(newText).X < backRect.Width)
+           // {
                 text = newText; //Set the text
                 cursorPos++; //Move the text cursor
-            }
+                             // }
+            WrapText(text);
         }
 
         public void BackSpace()
         {
-            text = text.Remove(text.Length - 1);
-            cursorPos--;
+            if (text.Length > 0)
+            {
+                text = text.Remove(text.Length - 1);
+                cursorPos--;
+            }
         }
 
         public String ConvertKeyToChar(Keys key, bool shift)
