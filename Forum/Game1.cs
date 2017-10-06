@@ -15,6 +15,8 @@ namespace Forum
         ArrayList posts;
         //DeleteButton deleteButton;
         int numberPost;
+        //private Game game;
+        TextBox textBox;
 
         public Game1()
         {
@@ -29,6 +31,9 @@ namespace Forum
             postButton = new PostButton(GraphicsDevice, font);
             //deleteButton = new DeleteButton(GraphicsDevice, font);
             posts = new ArrayList();
+
+            // game = new Game();
+            textBox = new TextBox(GraphicsDevice, font);
 
             base.Initialize();
         }
@@ -53,7 +58,8 @@ namespace Forum
             postButton.Update(gameTime);
             if (postButton.NewPost())
             {
-                posts.Add(new Post(GraphicsDevice, "BLeach", "This is my first post. This is my first post. This is my first post. This is my first post. This is my first post.", font, postButton.getNewColor(), numberPost));
+                //GameWindow.Create(game, 500, 500);
+                posts.Add(new Post(GraphicsDevice, "BLeach", "This is my first post. This is my first post. This is my first post. This is my first post. This is my first post.", font, postButton.getNewColor(), numberPost, null));
                 numberPost++;
             }
 
@@ -73,8 +79,18 @@ namespace Forum
                     postDeleted = true;
                     numberPost--;
                 }
+
+                if (post == posts[0])
+                {
+                    if (Mouse.GetState().X > 700)
+                        post.x--;
+                    else if (Mouse.GetState().X < 100)
+                        post.x++;
+                }
             }
             posts.Remove(deletedPost);
+
+            textBox.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -92,6 +108,8 @@ namespace Forum
             {
                 post.Draw(spriteBatch);
             }
+
+            textBox.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

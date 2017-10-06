@@ -21,15 +21,17 @@ namespace Forum
         RespondButton respond;
         DeleteButton delete;
 
-        public Response(GraphicsDevice g, String author, String post, SpriteFont font, Color color, int num)
+        public Response previous, next;
+
+        public Response(GraphicsDevice g, String author, String post, SpriteFont font, Color color, Post previous)
         {
             this.author = author;
             this.post = post;
 
             t = new Texture2D(g, 1, 1);
             t.SetData(new Color[] { Color.White });
-            r = new Rectangle(10 + (10 * num) + (200 * num), 60, 200, 300);//----------------------------------
-            textPosition = new Vector2(15 + (15 * num) + (200 * num), 70);//-----------------------------------
+            r = new Rectangle(previous.r.X, previous.r.Y + previous.r.Height, previous.r.Width, previous.r.Height);
+            textPosition = new Vector2(15 + (15 * previous.num) + (200 * previous.num), 70 + previous.r.Height);
 
             this.font = font;
             this.color = color;

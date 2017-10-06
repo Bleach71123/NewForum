@@ -32,6 +32,19 @@ namespace Forum
             r = new Rectangle((int)this.v2.X - 3, (int)this.v2.Y - 3, 70, 25);
         }
 
+        public bool respondPressed()
+        {
+            if (clickReleaseReady && Mouse.GetState().LeftButton == ButtonState.Released)
+            {
+                clickReleaseReady = false;
+                if (Mouse.GetState().X > v2.X - 3 && Mouse.GetState().X < v2.X - 3 + 70 && Mouse.GetState().Y > v2.Y - 3 && Mouse.GetState().Y < v2.Y - 3 + 25)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void Update(GameTime gt)
         {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
