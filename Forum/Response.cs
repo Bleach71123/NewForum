@@ -37,6 +37,7 @@ namespace Forum
             respond = new RespondButton(g, font, textPosition);
         }
 
+
         public void Update(GameTime gt)
         {
             respond.Update(gt);
@@ -53,7 +54,7 @@ namespace Forum
             respond.Draw(b);
         }
 
-        private String WrapText(string text)
+        public String WrapText(string text)
         {
             string[] words = text.Split(' ');
             StringBuilder sb = new StringBuilder();
@@ -77,5 +78,6 @@ namespace Forum
             }
             return sb.ToString();
         }
+
     }
 }

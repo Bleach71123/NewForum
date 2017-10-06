@@ -26,6 +26,12 @@ namespace Forum
             
         }
 
+        public void setPosition(Vector2 position)
+        {
+            v2 = position + new Vector2(5, 250);
+            r = new Rectangle((int)this.v2.X - 3, (int)this.v2.Y - 3, 70, 25);
+        }
+
         public void Update(GameTime gt)
         {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)

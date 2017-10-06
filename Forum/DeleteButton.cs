@@ -26,6 +26,25 @@ namespace Forum
             
         }
 
+        public void setPosition(Vector2 position)
+        {
+            v2 = position + new Vector2(128, 250);
+            r = new Rectangle((int)this.v2.X - 10, (int)this.v2.Y - 3, 70, 25);
+        }
+
+        public bool deletePressed()
+        {
+            if (clickReleaseReady && Mouse.GetState().LeftButton == ButtonState.Released)
+            {
+                clickReleaseReady = false;
+                if (Mouse.GetState().X > v2.X - 3 && Mouse.GetState().X < v2.X - 10 + 70 && Mouse.GetState().Y > v2.Y - 3 && Mouse.GetState().Y < v2.Y - 3 + 25)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void Update(GameTime gt)
         {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)

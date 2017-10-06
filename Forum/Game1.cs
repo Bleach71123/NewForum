@@ -56,10 +56,25 @@ namespace Forum
                 posts.Add(new Post(GraphicsDevice, "BLeach", "This is my first post. This is my first post. This is my first post. This is my first post. This is my first post.", font, postButton.getNewColor(), numberPost));
                 numberPost++;
             }
+
+            bool postDeleted = false;
+            Post deletedPost = null;
             foreach (Post post in posts)
             {
                 post.Update(gameTime);
+
+                if (postDeleted)
+                {
+                    post.num--;
+                }
+                if (post.deletePost())
+                {
+                    deletedPost = post;
+                    postDeleted = true;
+                    numberPost--;
+                }
             }
+            posts.Remove(deletedPost);
 
             base.Update(gameTime);
         }

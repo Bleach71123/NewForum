@@ -20,6 +20,8 @@ namespace Forum
         RespondButton respond;
         DeleteButton delete;
 
+        public int num;
+
         public Post(GraphicsDevice g, String author, String post, SpriteFont font, Color color, int num)
         {
             this.author = author;
@@ -35,12 +37,19 @@ namespace Forum
 
             respond = new RespondButton(g, font, textPosition);
             delete = new DeleteButton(g, font, textPosition);
+
+            this.num = num;
         }
 
         public void Update(GameTime gt)
         {
             respond.Update(gt);
             delete.Update(gt);
+
+            r = new Rectangle(10 + (200 * num), 60, 200, 300);
+            textPosition = new Vector2(15 + (200 * num), 70);
+            respond.setPosition(textPosition);
+            delete.setPosition(textPosition);
         }
 
         public void Draw(SpriteBatch b)
@@ -78,6 +87,11 @@ namespace Forum
                 }
             }
             return sb.ToString();
+        }
+
+        public bool deletePost()
+        {
+            return delete.deletePressed();
         }
     }
 }
